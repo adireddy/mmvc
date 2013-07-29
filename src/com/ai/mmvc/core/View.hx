@@ -22,13 +22,8 @@ SOFTWARE.
 
 package com.ai.mmvc.core;
 
-#if flash
 import flash.display.Sprite;
 import flash.display.Bitmap;
-#elseif js
-import js.Lib;
-import js.Dom;
-#end
 import msignal.Signal;
 
 /**
@@ -98,27 +93,7 @@ class View
 	*/
 	public var signal(default, null):Signal2<String, View>;
 
-	#if flash
-
-		/**
-		native flash sprite representing this view in the display list
-		*/
-		public var sprite(default, null):Sprite;
-
-	#elseif js
-
-		/**
-		native html element representing this view in the DOM
-		*/
-		public var element(default, null):HtmlDom;
-		
-		/**
-		Optional tag name to use when creating element via Lib.document.createElement
-		defaults to 'div'
-		*/
-		var tagName:String;
-	#end
-
+	public var sprite(default, null):Sprite;
 	/**
 	Contains all children currently added to view
 	*/
@@ -178,12 +153,8 @@ class View
 
 		children.push(view);
 
-		#if flash
 		sprite.addChild(view.sprite);
-		#elseif js
-		element.appendChild(view.element);
-		#end
-
+		
 		dispatch(ADDED, view);
 	}
 
@@ -208,11 +179,7 @@ class View
 			view.parent = null;
 			view.index = -1;
 
-			#if flash
 			sprite.removeChild(view.sprite);
-			#elseif js
-			element.removeChild(view.element);
-			#end
 
 			for(i in oldIndex...children.length)
 			{
@@ -231,14 +198,7 @@ class View
 	*/
 	function initialize()
 	{
-		#if flash
 		sprite = new Sprite();
-		#elseif js
-		if(tagName == null) tagName = "div";
-		element = Lib.document.createElement(tagName);
-		element.setAttribute("id", id);
-		element.className = className;
-		#end
 	}
 
 	/**

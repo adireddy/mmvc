@@ -38,10 +38,6 @@ class ApplicationView extends View implements IViewContainer {
 	
 	override function initialize() {
 		super.initialize();
-		#if flash
-			flash.Lib.current.addChild(sprite);
-		#elseif js
-			js.Lib.document.body.appendChild(element);
-		#end
+		flash.Lib.current.addChild(sprite);
 	}	
 }
