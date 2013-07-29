@@ -19,46 +19,19 @@ class ImageViewMediator extends Mediator<ImageView> {
 		super();
 	}
 
-	/**
-	Dispatches loadTodoList on registration of mediator
-	@see mmvc.impl.Mediator
-	@see mmvc.base.MediatorBase.mediate()
-	*/
 	override function onRegister() {
-		//using mediate() to store listeners for easy cleanup during removal
-		//mediate(view.signal.add(viewHandler));
+		trace("Dispatching loadImage signal which triggers LoadDataCommand");
 		mediate(loadImage.completed.addOnce(loadCompleted));
-		//mediate(loadTodoList.failed.addOnce(loadFailed));
-
 		loadImage.dispatch();
 	}
 
-	/**
-	Override onRemove to remove any unmediated listeners
-	@see mmvc.impl.Mediator
-	*/
 	override public function onRemove():Void {
 		super.onRemove();
-		//remove un mediated listeners
 	}
 
-	/**
-	callback for successful load of TodoList
-	@see example.todo.signal.LoadTodoList
-	*/
 	function loadCompleted() {
+		trace("Signal completed function setting up view with the data from AppData model");
 		view.processData(appData.text);
 		view.showImage(appData.img);
-	}
-
-	function loadFailed(error:Dynamic) {
-		//view.showError(Std.string(error));
-	}
-
-	/**
-	Adds a new todo item to the model when CREATE_TODO event is dispatched
-	*/
-	function viewHandler(event:String, view:View) {
-		
 	}
 }

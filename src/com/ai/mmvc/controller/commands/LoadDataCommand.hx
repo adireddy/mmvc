@@ -21,6 +21,8 @@ class LoadDataCommand extends Command {
 	}
 
 	override public function execute():Void	{
+		trace("Loading XML and Image");
+		trace("Assigning loaded data to AppData Model and dispatching LoadData completed signal");
 		appData.text = Assets.getText("assets/test.xml");
 		appData.img = new Bitmap(Assets.getBitmapData("assets/haxe.png"));
 		loadData.completed.dispatch();

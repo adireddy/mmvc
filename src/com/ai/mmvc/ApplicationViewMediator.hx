@@ -8,18 +8,12 @@ class ApplicationViewMediator extends Mediator<ApplicationView> {
 		super();
 	}
 
-	/**
-	Context has now been initialized. Time to create the rest of the main views in the application
-	@see mmvc.impl.Mediator.onRegister()
-	*/
 	override function onRegister() {
+		trace("Creating views");
 		super.onRegister();
 		view.createViews();
 	}
 
-	/**
-	@see mmvc.impl.Mediator
-	*/
 	override public function onRemove():Void {
 		super.onRemove();
 	}

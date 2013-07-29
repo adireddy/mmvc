@@ -19,7 +19,8 @@ class ApplicationContext extends Context {
 	}
 	
 	override public function startup() {
-		// wiring for todo model
+		trace("Setting up all context mapping");
+		var view:ApplicationView = new ApplicationView();
 		commandMap.mapSignalClass(LoadData, LoadDataCommand);
 		
 		injector.mapSingleton(AppData);

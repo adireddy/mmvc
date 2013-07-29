@@ -14,6 +14,7 @@ class ApplicationView extends View implements IViewContainer {
 	}
 	
 	public function createViews() {
+		trace("Creating ImageView which triggers ImageViewMeidator");
 		var imageView = new ImageView();
 		addChild(imageView);
 	}
